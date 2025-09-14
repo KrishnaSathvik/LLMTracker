@@ -11,10 +11,19 @@ const app = Fastify({
   logger: process.env.NODE_ENV === 'production' ? false : true,
   trustProxy: true
 });
-await initDb();
+
 await app.register(cors, { 
   origin: process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : ['http://localhost:3000']
 });
+
+// Initialize database with error handling
+try {
+  await initDb();
+  console.log('Database initialized successfully');
+} catch (error) {
+  console.error('Database initialization failed:', error);
+  console.log('Service will start but database operations may fail');
+}
 
 // API Key authentication middleware
 async function authenticateApiKey(request: any, reply: any) {
@@ -37,8 +46,26 @@ async function authenticateApiKey(request: any, reply: any) {
   (request as any).workspaceId = rows[0].workspace_id;
 }
 
-// Health
-app.get('/health', async () => ({ ok: true }));
+// Health check - doesn't require database
+app.get('/health', async (request, reply) => {
+  try {
+    // Try to ping the database
+    await pool.query('SELECT 1');
+    return { 
+      ok: true, 
+      database: 'connected',
+      timestamp: new Date().toISOString()
+    };
+  } catch (error) {
+    reply.code(503);
+    return { 
+      ok: false, 
+      database: 'disconnected',
+      error: error instanceof Error ? error.message : 'Unknown error',
+      timestamp: new Date().toISOString()
+    };
+  }
+});
 
 // Workspace management
 app.post('/workspaces', async (req, reply) => {
@@ -510,7 +537,12 @@ app.get('/reports/sessions', async () => {
   return { sessions };
 });
 
-app.listen({ port: PORT, host: '0.0.0.0' });
-if (process.env.NODE_ENV !== 'production') {
-  console.log(`API on http://localhost:${PORT}`);
+// Start the server with error handling
+try {
+  await app.listen({ port: PORT, host: '0.0.0.0' });
+  console.log(`🚀 LLM Tracker API started on port ${PORT}`);
+  console.log(`📊 Health check: http://localhost:${PORT}/health`);
+} catch (error) {
+  console.error('Failed to start server:', error);
+  process.exit(1);
 }
