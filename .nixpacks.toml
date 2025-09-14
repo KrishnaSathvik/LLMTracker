@@ -2,7 +2,7 @@
 nixPkgs = ["nodejs", "npm"]
 
 [phases.install]
-cmds = ["npm install", "cd services/api && npm install"]
+cmds = ["npm install", "cd services/api && npm install --include=dev"]
 
 [phases.build]
 cmds = ["cd services/api && npm run build"]
