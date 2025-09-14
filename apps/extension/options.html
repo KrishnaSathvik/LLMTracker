@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Agent Flight Recorder - Options</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #f9fafb;
+    }
+    .container {
+      background: white;
+      padding: 24px;
+      border-radius: 8px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    h1 {
+      color: #1f2937;
+      margin-bottom: 24px;
+    }
+    .section {
+      margin-bottom: 24px;
+      padding: 16px;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+    }
+    .section h3 {
+      margin-top: 0;
+      color: #374151;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #374151;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    textarea {
+      height: 100px;
+      resize: vertical;
+    }
+    button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    button.secondary {
+      background: #6b7280;
+    }
+    button.secondary:hover {
+      background: #4b5563;
+    }
+    .status {
+      padding: 8px 12px;
+      border-radius: 4px;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+    .status.success {
+      background: #d1fae5;
+      color: #065f46;
+      border: 1px solid #a7f3d0;
+    }
+    .status.error {
+      background: #fee2e2;
+      color: #991b1b;
+      border: 1px solid #fca5a5;
+    }
+    .help-text {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .domain-list {
+      max-height: 150px;
+      overflow-y: auto;
+      border: 1px solid #d1d5db;
+      border-radius: 4px;
+      padding: 8px;
+    }
+    .domain-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 4px 0;
+      border-bottom: 1px solid #f3f4f6;
+    }
+    .domain-item:last-child {
+      border-bottom: none;
+    }
+    .remove-domain {
+      background: #dc2626;
+      color: white;
+      border: none;
+      padding: 2px 6px;
+      border-radius: 2px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛡️ Agent Flight Recorder - Privacy & Policy</h1>
+    
+    <!-- API Configuration -->
+    <div class="section">
+      <h3>API Configuration</h3>
+      <label for="apiUrl">API URL:</label>
+      <input type="url" id="apiUrl" placeholder="https://api.llmtracker.dev">
+      <div class="help-text">The URL of your AFR API server</div>
+      
+      <label for="workspaceKey">Workspace Key (Optional):</label>
+      <input type="text" id="workspaceKey" placeholder="Your workspace API key">
+      <div class="help-text">For multi-tenant deployments</div>
+    </div>
+    
+    <!-- Domain Allowlist -->
+    <div class="section">
+      <h3>Domain Allowlist</h3>
+      <label>Allowed Domains:</label>
+      <div class="domain-list" id="domainList">
+        <div style="color: #6b7280; text-align: center; padding: 20px;">
+          No domains configured - capturing all sites
+        </div>
+      </div>
+      
+      <div style="margin-top: 12px;">
+        <input type="text" id="newDomain" placeholder="example.com">
+        <button onclick="addDomain()">Add Domain</button>
+      </div>
+      <div class="help-text">
+        Leave empty to capture all sites. Add domains to restrict capture to approved sites only.
+      </div>
+    </div>
+    
+    <!-- Redaction Rules -->
+    <div class="section">
+      <h3>Data Redaction</h3>
+      <label>
+        <input type="checkbox" id="redactEmails"> Redact email addresses
+      </label>
+      <label>
+        <input type="checkbox" id="redactTokens"> Redact JWT/API tokens
+      </label>
+      <label>
+        <input type="checkbox" id="redactPII"> Redact common PII patterns
+      </label>
+      
+      <label for="customRedaction">Custom Redaction Patterns (regex):</label>
+      <textarea id="customRedaction" placeholder="(?i)(password|secret|key)\\s*[:=]\\s*['\"]?([^'\"\\s]+)['\"]?"></textarea>
+      <div class="help-text">
+        One regex pattern per line. Matches will be replaced with [REDACTED]
+      </div>
+    </div>
+    
+    <!-- Retention Settings -->
+    <div class="section">
+      <h3>Data Retention</h3>
+      <label for="retentionDays">Retention Period (days):</label>
+      <select id="retentionDays">
+        <option value="7">7 days</option>
+        <option value="30" selected>30 days</option>
+        <option value="90">90 days</option>
+        <option value="0">Keep forever</option>
+      </select>
+      <div class="help-text">
+        Runs older than this will be automatically deleted
+      </div>
+    </div>
+    
+    <!-- Privacy Flags -->
+    <div class="section">
+      <h3>Privacy Monitoring</h3>
+      <label>
+        <input type="checkbox" id="flagPII" checked> Flag potential PII on screen
+      </label>
+      <label>
+        <input type="checkbox" id="auditMode"> Enable audit mode (detailed logging)
+      </label>
+      <div class="help-text">
+        Audit mode provides detailed logs for compliance reporting
+      </div>
+    </div>
+    
+    <!-- Actions -->
+    <div style="display: flex; gap: 12px; margin-top: 24px;">
+      <button onclick="saveSettings()">💾 Save Settings</button>
+      <button class="secondary" onclick="resetSettings()">🔄 Reset to Defaults</button>
+      <button class="secondary" onclick="exportSettings()">📤 Export Config</button>
+      <button class="secondary" onclick="importSettings()">📥 Import Config</button>
+    </div>
+    
+    <div id="status"></div>
+  </div>
+  
+  <script src="options.js"></script>
+</body>
+</html>

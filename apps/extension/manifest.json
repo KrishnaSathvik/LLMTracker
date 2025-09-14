@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "LLM Tracker",
+  "version": "0.1.0",
+  "description": "Track LLM interactions: API calls, user clicks, and responses",
+  "permissions": ["scripting", "storage", "activeTab", "webNavigation"],
+  "host_permissions": ["http://*/*", "https://*/*"],
+  "background": { "service_worker": "sw.js" },
+  "content_scripts": [{
+    "matches": ["http://*/*", "https://*/*"],
+    "js": ["content.js"],
+    "run_at": "document_start"
+  }],
+  "action": { "default_title": "LLM Tracker" },
+  "options_page": "options.html",
+  "web_accessible_resources": [{
+    "resources": ["inject.js"],
+    "matches": ["http://*/*", "https://*/*", "file://*/*"]
+  }]
+}

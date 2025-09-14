@@ -1,0 +1,11 @@
+* { box-sizing: border-box; }
+body { margin: 0; }
+a { color: #0366d6; text-decoration: none; }
+a:hover { text-decoration: underline; }
+code { background: #f5f5f5; padding: 2px 4px; border-radius: 4px; }
+.row { display:flex; gap: 16px; }
+.card { border: 1px solid #eee; border-radius: 8px; padding: 12px; }
+.timeline { border-left: 2px solid #ddd; padding-left: 12px; }
+.event { margin: 8px 0; }
+.event .kind { font-weight: bold; }
+small.muted { color: #888; }
