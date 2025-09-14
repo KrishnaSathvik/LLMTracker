@@ -33,11 +33,7 @@ export async function initDb() {
   create index if not exists idx_api_keys_key on api_keys(key);
   `);
 
-  // Add workspace_id to runs table
-  await pool.query(`
-  alter table runs add column if not exists workspace_id uuid references workspaces(id) on delete cascade;
-  `);
-
+  // Create runs table
   await pool.query(`
   create table if not exists runs (
     id uuid primary key,
