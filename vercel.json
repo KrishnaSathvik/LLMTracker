@@ -6,13 +6,6 @@
       "use": "@vercel/next"
     }
   ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "apps/web/$1"
-    }
-  ],
-  "outputDirectory": "apps/web/.next",
   "env": {
     "NEXT_PUBLIC_API_URL": "https://api.llmtracker.dev",
     "NEXT_PUBLIC_API_KEY": "placeholder-key",
