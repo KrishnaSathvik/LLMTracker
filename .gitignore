@@ -112,3 +112,4 @@ Thumbs.db
 # Analysis files
 *-analysis.md
 *-analysis-annotated.md
+.vercel
