@@ -82,31 +82,31 @@ export default function Analytics() {
           <div className="card">
             <h3>Total Runs</h3>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#2563eb' }}>
-              {data.overview.totals.runs}
+              {data.overview?.totals?.runs || 0}
             </div>
           </div>
           <div className="card">
             <h3>Total Events</h3>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#059669' }}>
-              {data.overview.totals.events.toLocaleString()}
+              {(data.overview?.totals?.events || 0).toLocaleString()}
             </div>
           </div>
           <div className="card">
             <h3>LLM Calls</h3>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#dc2626' }}>
-              {data.overview.totals.llmCalls.toLocaleString()}
+              {(data.overview?.totals?.llmCalls || 0).toLocaleString()}
             </div>
           </div>
           <div className="card">
             <h3>User Clicks</h3>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#7c3aed' }}>
-              {data.overview.totals.clicks.toLocaleString()}
+              {(data.overview?.totals?.clicks || 0).toLocaleString()}
             </div>
           </div>
           <div className="card">
             <h3>DOM Fingerprints</h3>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#ea580c' }}>
-              {data.overview.totals.domFingerprints.toLocaleString()}
+              {(data.overview?.totals?.domFingerprints || 0).toLocaleString()}
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@ export default function Analytics() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.providers.map((provider) => (
+                  {data.providers?.map((provider) => (
                     <tr key={provider.provider} style={{ borderBottom: '1px solid #f3f4f6' }}>
                       <td style={{ padding: '8px', fontWeight: '500' }}>{provider.provider}</td>
                       <td style={{ textAlign: 'right', padding: '8px' }}>{provider.count}</td>
@@ -153,20 +153,20 @@ export default function Analytics() {
             <div style={{ marginBottom: '16px' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span>Total Clicks:</span>
-                <strong>{data.correlations.total_clicks}</strong>
+                <strong>{data.correlations?.total_clicks || 0}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span>Client Correlated:</span>
-                <strong>{data.correlations.correlated_clicks}</strong>
+                <strong>{data.correlations?.correlated_clicks || 0}</strong>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px' }}>
                 <span>Server Correlated:</span>
-                <strong>{data.correlations.server_correlated_clicks}</strong>
+                <strong>{data.correlations?.server_correlated_clicks || 0}</strong>
               </div>
             </div>
             <div style={{ background: '#f3f4f6', padding: '12px', borderRadius: '8px' }}>
               <div style={{ fontSize: '0.9em', color: '#666' }}>
-                Correlation Rate: {Math.round((data.correlations.correlated_clicks / Math.max(data.correlations.total_clicks, 1)) * 100)}%
+                Correlation Rate: {Math.round(((data.correlations?.correlated_clicks || 0) / Math.max(data.correlations?.total_clicks || 1, 1)) * 100)}%
               </div>
             </div>
           </div>
@@ -189,7 +189,7 @@ export default function Analytics() {
                 </tr>
               </thead>
               <tbody>
-                {data.performance.slice(0, 12).map((hour) => (
+                {data.performance?.slice(0, 12)?.map((hour) => (
                   <tr key={hour.hour} style={{ borderBottom: '1px solid #f3f4f6' }}>
                     <td style={{ padding: '8px' }}>
                       {new Date(hour.hour).toLocaleString()}
@@ -213,10 +213,10 @@ export default function Analytics() {
         <div className="card">
           <h3>Recent Activity</h3>
           <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-            {data.overview.recentRuns.map((run, index) => (
+            {data.overview?.recentRuns?.map((run, index) => (
               <div key={index} style={{ 
                 padding: '12px', 
-                borderBottom: index < data.overview.recentRuns.length - 1 ? '1px solid #f3f4f6' : 'none',
+                borderBottom: index < (data.overview?.recentRuns?.length || 0) - 1 ? '1px solid #f3f4f6' : 'none',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
