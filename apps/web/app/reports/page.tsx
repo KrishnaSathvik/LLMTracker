@@ -91,19 +91,19 @@ export default function Reports() {
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '16px' }}>
           <div style={{ textAlign: 'center', padding: '16px', background: '#f0f9ff', borderRadius: '8px' }}>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#0369a1' }}>
-              {data.insights.total_sessions}
+              {data.insights?.total_sessions || 0}
             </div>
             <div style={{ color: '#666' }}>Total Sessions</div>
           </div>
           <div style={{ textAlign: 'center', padding: '16px', background: '#f0fdf4', borderRadius: '8px' }}>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#059669' }}>
-              {Math.round(data.insights.avg_session_duration)}min
+              {Math.round(data.insights?.avg_session_duration || 0)}min
             </div>
             <div style={{ color: '#666' }}>Avg Session Duration</div>
           </div>
           <div style={{ textAlign: 'center', padding: '16px', background: '#fef3c7', borderRadius: '8px' }}>
             <div style={{ fontSize: '2em', fontWeight: 'bold', color: '#d97706' }}>
-              {Math.round(data.insights.correlation_effectiveness)}%
+              {Math.round(data.insights?.correlation_effectiveness || 0)}%
             </div>
             <div style={{ color: '#666' }}>Correlation Effectiveness</div>
           </div>
@@ -115,7 +115,7 @@ export default function Reports() {
         <div className="card">
           <h3>Provider Usage Analysis</h3>
           <div style={{ marginBottom: '16px' }}>
-            {data.insights.most_active_providers.map((provider, index) => (
+            {data.insights?.most_active_providers?.map((provider, index) => (
               <div key={provider.provider} style={{ 
                 display: 'flex', 
                 justifyContent: 'space-between', 
@@ -149,7 +149,7 @@ export default function Reports() {
         <div className="card">
           <h3>Performance Trends (Last 3 Days)</h3>
           <div style={{ marginBottom: '16px' }}>
-            {data.insights.performance_trends.map((trend, index) => (
+            {data.insights?.performance_trends?.map((trend, index) => (
               <div key={trend.date} style={{ 
                 padding: '12px',
                 background: index % 2 === 0 ? '#f9fafb' : 'white',
@@ -187,7 +187,7 @@ export default function Reports() {
               </tr>
             </thead>
             <tbody>
-              {data.sessions.map((session) => (
+              {data.sessions?.map((session) => (
                 <tr key={session.run_id} style={{ borderBottom: '1px solid #f3f4f6' }}>
                   <td style={{ padding: '12px' }}>
                     <div style={{ fontWeight: '500' }}>

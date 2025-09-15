@@ -163,16 +163,16 @@ export default function RunPage() {
                 <div style={{ background: '#f9fafb', padding: '12px', borderRadius: '4px' }}>
                   <h5>DOM Summary</h5>
                   <div style={{ fontSize: '0.9em' }}>
-                    <div><strong>Elements:</strong> {currentKeyframe.data.domSnapshot.elementCount}</div>
+                    <div><strong>Elements:</strong> {currentKeyframe.data?.domSnapshot?.elementCount || 0}</div>
                     <div><strong>Links:</strong> {currentKeyframe.data.domSnapshot.links?.length || 0}</div>
                     <div><strong>Buttons:</strong> {currentKeyframe.data.domSnapshot.buttons?.length || 0}</div>
                   </div>
                   
-                  {currentKeyframe.data.domSnapshot.buttons?.length > 0 && (
+                  {currentKeyframe.data?.domSnapshot?.buttons?.length > 0 && (
                     <div style={{ marginTop: '8px' }}>
                       <strong>Buttons:</strong>
                       <ul style={{ margin: '4px 0', paddingLeft: '20px' }}>
-                        {currentKeyframe.data.domSnapshot.buttons.map((btn: any, i: number) => (
+                        {currentKeyframe.data?.domSnapshot?.buttons?.map((btn: any, i: number) => (
                           <li key={i} style={{ fontSize: '0.8em' }}>
                             "{btn.text}" {btn.disabled ? '(disabled)' : ''}
                           </li>
@@ -181,11 +181,11 @@ export default function RunPage() {
                     </div>
                   )}
                   
-                  {currentKeyframe.data.domSnapshot.links?.length > 0 && (
+                  {currentKeyframe.data?.domSnapshot?.links?.length > 0 && (
                     <div style={{ marginTop: '8px' }}>
                       <strong>Links:</strong>
                       <ul style={{ margin: '4px 0', paddingLeft: '20px' }}>
-                        {currentKeyframe.data.domSnapshot.links.map((link: any, i: number) => (
+                        {currentKeyframe.data?.domSnapshot?.links?.map((link: any, i: number) => (
                           <li key={i} style={{ fontSize: '0.8em' }}>
                             "{link.text}" → {link.href}
                           </li>

@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Replayer } from 'rrweb-player';
+import Replayer from 'rrweb-player';
 
 interface Keyframe {
   id: string;
@@ -51,7 +51,7 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
     // Get rrweb events from keyframes
     const rrwebEvents = keyframes
       .filter(kf => kf.data?.rrwebEvent)
-      .map(kf => kf.data.rrwebEvent)
+      .map(kf => kf.data?.rrwebEvent)
       .sort((a, b) => a.timestamp - b.timestamp);
 
     if (rrwebEvents.length > 0) {
@@ -296,13 +296,13 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
                       URL: {currentKeyframe.data.url || 'N/A'}
                     </div>
                     <div className="text-xs text-gray-600 mb-2">
-                      Elements: {currentKeyframe.data.domSnapshot.elementCount}
+                      Elements: {currentKeyframe.data?.domSnapshot?.elementCount || 0}
                     </div>
                     
-                    {currentKeyframe.data.domSnapshot.buttons?.length > 0 && (
+                    {currentKeyframe.data?.domSnapshot?.buttons?.length > 0 && (
                       <div className="mb-2">
                         <div className="text-xs font-medium text-gray-700 mb-1">Buttons:</div>
-                        {currentKeyframe.data.domSnapshot.buttons.slice(0, 3).map((btn: any, i: number) => (
+                        {currentKeyframe.data?.domSnapshot?.buttons?.slice(0, 3)?.map((btn: any, i: number) => (
                           <div key={i} className="text-xs text-gray-600 ml-2">
                             • {btn.text} {btn.disabled ? '(disabled)' : ''}
                           </div>
@@ -310,10 +310,10 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
                       </div>
                     )}
                     
-                    {currentKeyframe.data.domSnapshot.links?.length > 0 && (
+                    {currentKeyframe.data?.domSnapshot?.links?.length > 0 && (
                       <div>
                         <div className="text-xs font-medium text-gray-700 mb-1">Links:</div>
-                        {currentKeyframe.data.domSnapshot.links.slice(0, 3).map((link: any, i: number) => (
+                        {currentKeyframe.data?.domSnapshot?.links?.slice(0, 3)?.map((link: any, i: number) => (
                           <div key={i} className="text-xs text-gray-600 ml-2">
                             • {link.text} → {link.href}
                           </div>
