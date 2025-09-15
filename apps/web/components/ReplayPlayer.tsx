@@ -22,7 +22,7 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
   const [currentTime, setCurrentTime] = useState(selectedTime);
   const [duration, setDuration] = useState(0);
   const replayRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number>();
+  const animationRef = useRef<number | null>(null);
   const replayerRef = useRef<Replayer | null>(null);
 
   // Calculate duration from events
