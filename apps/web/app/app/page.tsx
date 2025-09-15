@@ -19,6 +19,8 @@ export default function Dashboard() {
 
   useEffect(() => {
     // Check authentication
+    if (typeof window === 'undefined') return;
+    
     const apiKey = localStorage.getItem('afr_api_key');
     if (!apiKey) {
       window.location.href = '/auth';
@@ -55,6 +57,7 @@ export default function Dashboard() {
     setLoading(true);
     setSelected(null);
     try {
+      if (typeof window === 'undefined') return;
       const apiKey = localStorage.getItem('afr_api_key');
       const headers = { 'X-AFR-Key': apiKey || '' };
       const [run, evs] = await Promise.all([
@@ -132,7 +135,7 @@ export default function Dashboard() {
     URL.revokeObjectURL(url);
   };
 
-  const workspaceName = localStorage.getItem('afr_workspace_name') || 'Your Workspace';
+  const workspaceName = typeof window !== 'undefined' ? localStorage.getItem('afr_workspace_name') || 'Your Workspace' : 'Your Workspace';
 
   return (
     <div className="row">

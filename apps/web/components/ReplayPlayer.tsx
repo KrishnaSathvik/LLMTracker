@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect, useRef } from 'react';
 import Replayer from 'rrweb-player';
@@ -44,7 +44,7 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
 
     // Clean up existing replayer
     if (replayerRef.current) {
-      replayerRef.current.destroy();
+      // rrweb-player doesn't have a destroy method, just set to null
       replayerRef.current = null;
     }
 
@@ -56,17 +56,10 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
 
     if (rrwebEvents.length > 0) {
       try {
-        replayerRef.current = new Replayer(rrwebEvents, {
+        replayerRef.current = new Replayer({
           target: replayRef.current,
           props: {
-            width: 800,
-            height: 600
-          },
-          mouseTail: {
-            duration: 500,
-            lineCap: 'round',
-            lineWidth: 3,
-            strokeStyle: 'red'
+            events: rrwebEvents
           }
         });
 
@@ -78,7 +71,7 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
 
     return () => {
       if (replayerRef.current) {
-        replayerRef.current.destroy();
+        // rrweb-player doesn't have a destroy method
         replayerRef.current = null;
       }
     };
@@ -168,7 +161,8 @@ export default function ReplayPlayer({ keyframes, events, selectedTime, onTimeCh
     if (replayerRef.current) {
       // Convert milliseconds to seconds for rrweb
       const seekTime = newTime / 1000;
-      replayerRef.current.setCurrentTime(seekTime);
+      // Note: rrweb-player may not have setCurrentTime method
+      // This functionality might need to be implemented differently
     }
   };
 

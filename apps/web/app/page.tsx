@@ -8,6 +8,8 @@ export default function LandingPage() {
 
   useEffect(() => {
     // Check if user is already authenticated
+    if (typeof window === 'undefined') return;
+    
     const apiKey = localStorage.getItem('afr_api_key');
     const workspaceId = localStorage.getItem('afr_workspace_id');
     setIsAuthenticated(!!(apiKey && workspaceId));

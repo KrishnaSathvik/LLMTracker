@@ -1,4 +1,4 @@
-export const metadata = { title: 'LLM Tracker Dashboard' };
+"use client";
 
 export default function AppLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -13,10 +13,12 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
             <a href="/" style={{ color: '#666', textDecoration: 'none' }}>← Back to Home</a>
             <button 
               onClick={() => {
-                localStorage.removeItem('afr_api_key');
-                localStorage.removeItem('afr_workspace_id');
-                localStorage.removeItem('afr_workspace_name');
-                window.location.href = '/';
+                if (typeof window !== 'undefined') {
+                  localStorage.removeItem('afr_api_key');
+                  localStorage.removeItem('afr_workspace_id');
+                  localStorage.removeItem('afr_workspace_name');
+                  window.location.href = '/';
+                }
               }}
               style={{ 
                 padding: '8px 16px', 

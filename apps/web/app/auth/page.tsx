@@ -42,9 +42,11 @@ export default function AuthPage() {
         const apiKey = await keyResponse.json();
         
         // Store in localStorage for demo (in production, use proper auth)
-        localStorage.setItem('afr_workspace_id', workspace.workspace.id);
-        localStorage.setItem('afr_api_key', apiKey.apiKey.key);
-        localStorage.setItem('afr_workspace_name', formData.workspaceName);
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('afr_workspace_id', workspace.workspace.id);
+          localStorage.setItem('afr_api_key', apiKey.apiKey.key);
+          localStorage.setItem('afr_workspace_name', formData.workspaceName);
+        }
         
         router.push('/app');
       } else {
@@ -172,7 +174,9 @@ export default function AuthPage() {
               <button 
                 onClick={() => {
                   // Demo mode - create temporary workspace
-                  localStorage.setItem('afr_demo_mode', 'true');
+                  if (typeof window !== 'undefined') {
+                    localStorage.setItem('afr_demo_mode', 'true');
+                  }
                   router.push('/app');
                 }}
                 className="ml-1 text-blue-600 hover:text-blue-500 font-medium"
