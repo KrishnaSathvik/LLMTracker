@@ -63,7 +63,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
           <div className="text-center">
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-blue-100 text-blue-800 text-sm font-medium mb-8">
-              🚀 Trusted by 500+ AI teams worldwide
+              🚀 Track LLM interactions with complete visibility
             </div>
             <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight">
               Stop Guessing.
@@ -91,20 +91,19 @@ export default function LandingPage() {
               </Link>
             </div>
             
-            {/* Social Proof */}
+            {/* Value Proposition */}
             <div className="flex items-center justify-center space-x-8 text-gray-500 text-sm">
               <div className="flex items-center space-x-2">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 bg-blue-500 rounded-full border-2 border-white"></div>
-                  <div className="w-8 h-8 bg-green-500 rounded-full border-2 border-white"></div>
-                  <div className="w-8 h-8 bg-purple-500 rounded-full border-2 border-white"></div>
-                  <div className="w-8 h-8 bg-orange-500 rounded-full border-2 border-white"></div>
-                </div>
-                <span>Join 500+ teams</span>
+                <span className="text-green-500">✓</span>
+                <span>Real-time tracking</span>
               </div>
-              <div className="flex items-center space-x-1">
-                <span className="text-yellow-400">★★★★★</span>
-                <span>4.9/5 rating</span>
+              <div className="flex items-center space-x-2">
+                <span className="text-green-500">✓</span>
+                <span>Smart correlation</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <span className="text-green-500">✓</span>
+                <span>Performance analytics</span>
               </div>
             </div>
           </div>
@@ -272,71 +271,47 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Benefits Section */}
       <section className="bg-white py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-              Trusted by AI teams everywhere
+              Why choose LLM Tracker?
             </h2>
-            <p className="text-xl text-gray-600">
-              See what our customers are saying about LLM Tracker
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Get the insights you need to optimize your LLM interactions and improve user experience.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-gray-50 p-8 rounded-2xl">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  S
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Sarah Chen</h4>
-                  <p className="text-gray-600 text-sm">CTO, AI Startup</p>
-                </div>
+            <div className="text-center">
+              <div className="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl">⚡</span>
               </div>
-              <p className="text-gray-700 italic mb-4">
-                "We reduced our LLM costs by 40% in the first month. The insights were incredible - we had no idea users were abandoning our chatbot after 2 interactions."
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Instant Setup</h3>
+              <p className="text-gray-600">
+                Install our Chrome extension and start tracking in under 2 minutes. No complex configuration required.
               </p>
-              <div className="flex text-yellow-400">
-                ★★★★★
-              </div>
             </div>
 
-            <div className="bg-gray-50 p-8 rounded-2xl">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  M
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Mike Rodriguez</h4>
-                  <p className="text-gray-600 text-sm">Product Manager, Tech Corp</p>
-                </div>
+            <div className="text-center">
+              <div className="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl">🔍</span>
               </div>
-              <p className="text-gray-700 italic mb-4">
-                "Finally, we can see the full user journey. The correlation between user actions and LLM responses was eye-opening. Our conversion rate improved by 25%."
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Complete Visibility</h3>
+              <p className="text-gray-600">
+                See every API call, user interaction, and response in real-time. No more guessing what's happening.
               </p>
-              <div className="flex text-yellow-400">
-                ★★★★★
-              </div>
             </div>
 
-            <div className="bg-gray-50 p-8 rounded-2xl">
-              <div className="flex items-center mb-4">
-                <div className="w-12 h-12 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">
-                  A
-                </div>
-                <div>
-                  <h4 className="font-semibold text-gray-900">Alex Kim</h4>
-                  <p className="text-gray-600 text-sm">Founder, SaaS Company</p>
-                </div>
+            <div className="text-center">
+              <div className="bg-purple-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                <span className="text-2xl">📊</span>
               </div>
-              <p className="text-gray-700 italic mb-4">
-                "Setup was literally 2 minutes. We went from zero visibility to complete insights. Our response times improved by 60% after optimizing based on the data."
+              <h3 className="text-xl font-semibold mb-3 text-gray-900">Actionable Insights</h3>
+              <p className="text-gray-600">
+                Get performance metrics and optimization recommendations to improve your LLM's effectiveness.
               </p>
-              <div className="flex text-yellow-400">
-                ★★★★★
-              </div>
             </div>
           </div>
         </div>
@@ -502,8 +477,8 @@ export default function LandingPage() {
             Ready to stop flying blind?
           </h2>
           <p className="text-xl text-blue-100 mb-12 max-w-3xl mx-auto">
-            Join 500+ teams who've already optimized their LLM interactions. 
-            Start tracking in 2 minutes, see results in 24 hours.
+            Get complete visibility into your LLM interactions. 
+            Start tracking in 2 minutes, see results immediately.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link 
