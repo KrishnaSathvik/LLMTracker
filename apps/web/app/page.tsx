@@ -3,6 +3,8 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 
+// Trigger deployment
+
 export default function LandingPage() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
