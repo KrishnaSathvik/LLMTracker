@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import DiffPanel from '../../../components/DiffPanel';
-import ReplayPlayer from '../../../components/ReplayPlayer';
+import DiffPanel from '../../../../components/DiffPanel';
+import ReplayPlayer from '../../../../components/ReplayPlayer';
 
 const API = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
 
