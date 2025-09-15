@@ -213,10 +213,10 @@ export default function Analytics() {
         <div className="card">
           <h3>Recent Activity</h3>
           <div style={{ maxHeight: '300px', overflowY: 'auto' }}>
-            {data.overview.recentRuns.map((run, index) => (
+            {data.overview?.recentRuns?.map((run, index) => (
               <div key={index} style={{ 
                 padding: '12px', 
-                borderBottom: index < data.overview.recentRuns.length - 1 ? '1px solid #f3f4f6' : 'none',
+                borderBottom: index < (data.overview?.recentRuns?.length || 0) - 1 ? '1px solid #f3f4f6' : 'none',
                 display: 'flex',
                 justifyContent: 'space-between',
                 alignItems: 'center'
